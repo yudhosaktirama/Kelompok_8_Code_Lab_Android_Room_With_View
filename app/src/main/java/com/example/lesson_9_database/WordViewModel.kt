@@ -1,9 +1,7 @@
 package com.example.lesson_9_database
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
 class WordViewModel(private val repository: WordRepository) : ViewModel() {
@@ -14,3 +12,14 @@ class WordViewModel(private val repository: WordRepository) : ViewModel() {
         repository.insert(word)
     }
 }
+
+class WordViewModelFactory(private val repository: WordRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(WordViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return WordViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Uknown ViewModel class")
+    }
+}
+
