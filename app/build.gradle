@@ -1,8 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("com.google.devtools.ksp")
+
 }
-apply plugin: 'kotlin-kapt'
+
 
 android {
     namespace 'com.example.lesson_9_database'
@@ -46,8 +48,10 @@ dependencies {
     // You'll probably have to update the version numbers in build.gradle (Project)
 
     // Room components
-    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+
+    implementation 'androidx.room:room-common:2.5.2'
+    implementation 'androidx.room:room-ktx:2.5.2'
+    ksp("androidx.room:room-compiler:2.5.0")
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
     // Lifecycle components
@@ -56,7 +60,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
 
     // Kotlin components
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.32"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
